@@ -1,67 +1,80 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 const Home = () => {
   const mountRef = useRef<HTMLDivElement>(null!);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
 
   useEffect(() => {
-    // 基本場景設定
+    if (!mountRef.current) return;
+
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff); // 設定為白色背景
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
       0.1,
       1000
     );
+    cameraRef.current = camera;
+    camera.position.z = 5; // 將相機位置拉遠
+
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xffffff); // 設定背景色為黑色
     mountRef.current.appendChild(renderer.domElement);
 
-    // 光照設定
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // 環境光
-    scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // 定嚮光
-    directionalLight.position.set(0, 1, 0); // 根據需要調整位置
-    scene.add(directionalLight);
+    // 光源設定
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(1, 1, 1);
+    scene.add(light);
 
-    // 加載GLB模型
+    // 加載模型
     const loader = new GLTFLoader();
     loader.load(
-      "/models/bean.glb", // 替換為您的GLB模型路徑
+      "/models/bean.glb",
       (gltf) => {
-        const bean = gltf.scene; // 直接使用加載的場景
-        bean.scale.set(1, 0.5, 1); // 根據需要調整模型尺寸
-        bean.position.set(0, 0, 0); // 可能需要調整模型位置
-        scene.add(bean);
-
-        // 調整相機位置和朝向
-        camera.position.z = 5;
-        camera.lookAt(bean.position);
-
-        // 動畫渲染場景
-        const animate = function () {
-          requestAnimationFrame(animate);
-          bean.rotation.x += 0.01; // 可以根據需要調整旋轉速度
-          bean.rotation.y += 0.01;
-          renderer.render(scene, camera);
-        };
-
-        animate();
+        // 將模型的縮放因子設定為20，使其看起來更大
+        gltf.scene.scale.set(20, 20, 20);
+        scene.add(gltf.scene);
       },
-      undefined, // 進度回調函數（可選）
-      (error) => console.error("An error happened", error)
+      undefined,
+      (error) => console.error(error)
     );
 
-    // 清理資源，防止記憶體泄漏
+    let angle = 0; // 定義旋轉角度
+    let rotationAngle = 0; // 定義水準旋轉角度
+    const radius = 1; // 相機環繞半徑
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      // 維持旋轉
+      camera.position.x = radius * Math.sin(angle);
+      camera.position.z = radius * Math.cos(angle) + 5; // 以5為基礎距離進行旋轉
+      camera.lookAt(scene.position);
+      camera.rotation.y = rotationAngle; // 水準旋轉
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    // 處理滾輪事件以同時進行縮放和360度旋轉
+    const handleWheel = (event: any) => {
+      const delta = event.deltaY * 0.005;
+      angle += delta; // 調整角度以旋轉
+
+      const newPositionZ = camera.position.z + delta * 5; // 計算新的Z位置以進行縮放
+      // 限製相機的z位置，防止過於接近或遠離模型
+      camera.position.z = Math.min(Math.max(newPositionZ, 1), 10);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
     return () => {
-      if (mountRef.current) {
-        mountRef.current.removeChild(renderer.domElement);
-      }
+      mountRef.current.removeChild(renderer.domElement);
+      window.removeEventListener("wheel", handleWheel);
     };
   }, []);
 
