@@ -5,7 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "DevFlow",
+  title: "Contek",
   description: "A community driven platform for asking questions",
   icons: {
     icon: "/assets/images/site-logo.svg",

@@ -68,7 +68,7 @@ const MobileNav = () => {
                 side="left"
                 className="background-light900_dark200 border-none"
             >
-                <Link href="/" className="flex items-center gap-1">
+                <Link href="/home" className="flex items-center gap-1">
                     <Image
                         src="/assets/images/site-logo.svg"
                         width={23}
@@ -76,10 +76,10 @@ const MobileNav = () => {
                         alt="DevFlow"
                     />
                     <p className="h2-bold text-dark100_light900 font-spaceGrotesk">
-                        Dev<span className="text-primary-500">OverFlow</span>
+                        Con<span className="text--500">tek</span>
                     </p>
                 </Link>
-                <div>
+                <div>primary
                     <NavContent />
 
                     <div className="flex flex-col gap-3 pt-10">
