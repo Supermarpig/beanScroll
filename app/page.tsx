@@ -4,6 +4,7 @@ import gsap from "gsap";
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import Header from '@/components/shared/Header/Header'
 
 const Home = () => {
   const mountRef = useRef<HTMLDivElement>(null!);
@@ -78,7 +79,20 @@ const Home = () => {
     };
   }, []);
 
-  return <div ref={mountRef} style={{ width: "100vw", height: "100vh" }} />;
+  return (
+    <>
+      <Header/>
+      <div ref={mountRef} style={{ width: "100vw", height: "100vh" }} /> 
+      <div className="h-[100vh]">這放第1個展示</div>
+      <div className="h-[100vh]">這放第2個展示</div>
+      <div className="h-[100vh]">這放第3個展示</div>
+      <div className="h-[100vh]">這放第3個展示</div>
+      <div id="home"className="h-[100vh]">home 頁面</div>
+      <div id="pricing"className="h-[100vh]">pricing 頁面</div>
+      <div id="faq"className="h-[100vh]">faq 頁面</div>
+      <footer className="h-[30vh]"> 放頁尾連結</footer>
+    </>
+  )
 };
 
 export default Home;
