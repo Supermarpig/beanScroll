@@ -81,15 +81,15 @@ const Home = () => {
 
   return (
     <>
-      <Header/>
-      <div ref={mountRef} style={{ width: "100vw", height: "100vh" }} /> 
+      <Header />
+      <div ref={mountRef} className="h-[100vh] w-full"/>
       <div className="h-[100vh]">這放第1個展示</div>
       <div className="h-[100vh]">這放第2個展示</div>
       <div className="h-[100vh]">這放第3個展示</div>
       <div className="h-[100vh]">這放第3個展示</div>
-      <div id="home"className="h-[100vh]">home 頁面</div>
-      <div id="pricing"className="h-[100vh]">pricing 頁面</div>
-      <div id="faq"className="h-[100vh]">faq 頁面</div>
+      <div id="home" className="h-[100vh]">home 頁面</div>
+      <div id="pricing" className="h-[100vh]">pricing 頁面</div>
+      <div id="faq" className="h-[100vh]">faq 頁面</div>
       <footer className="h-[30vh]"> 放頁尾連結</footer>
     </>
   )
