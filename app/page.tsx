@@ -74,7 +74,9 @@ const Home = () => {
 
     window.addEventListener("wheel", handleWheel, { passive: false });
     return () => {
-      mountRef.current.removeChild(renderer.domElement);
+      if (mountRef.current && renderer.domElement.parentNode === mountRef.current) {
+        mountRef.current.removeChild(renderer.domElement);
+      }
       window.removeEventListener("wheel", handleWheel);
     };
   }, []);

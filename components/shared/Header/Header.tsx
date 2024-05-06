@@ -1,11 +1,17 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import HeaderM from './HeaderM'
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false); 
 
   useEffect(() => {
+
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.innerWidth < 768);
+    }
     const handleScroll = () => {
       // 當頁面向下滾動超過指定的距離時，設定 isScrolled 為 true
       const offset = window.scrollY > 20;
@@ -36,7 +42,7 @@ const Header = () => {
           : 'absolute w-full '} 
         `}>
         <nav
-          className={`mx-auto max-w-screen-xl flex items-center justify-between py-4 text-white
+          className={`mx-auto max-w-screen-xl flex items-center justify-between md:py-4 py-0 text-white
           ${isScrolled ? '' : 'w-full'}
         `}
           aria-label="Global">

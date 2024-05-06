@@ -7,9 +7,9 @@ const MobileNav = () => {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <button className="p-4">
+                <button className="p-4 mr-12">
                     <Image
-                        src="/path/to/hamburger_icon.svg" // 更換為實際路徑
+                        src="/assets/icons/hamburger.svg"
                         width={36}
                         height={36}
                         alt="Menu"
