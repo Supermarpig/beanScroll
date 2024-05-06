@@ -19,25 +19,37 @@ const MobileNav = () => {
             <SheetContent side="left" className="background-light900_dark200 border-none">
                 <div className="p-4">
                     <SheetClose asChild>
-                        <Link href="/home">
-                            <a className="flex items-center gap-2">
-                                <Image
-                                    src="/path/to/your_logo.svg" // 更換為實際路徑
-                                    width={40}
-                                    height={40}
-                                    alt="Logo"
-                                />
-                                <span className="text-lg font-bold">Your Logo</span>
-                            </a>
+                        <Link href="/home" className="flex items-center gap-2">
+                            <Image
+                                src="/assets/images/site-logo.svg"
+                                width={40}
+                                height={40}
+                                alt="Logo"
+                            />
+                            <span className="text-lg font-bold">Your Logo</span>
                         </Link>
                     </SheetClose>
                     {/* Navigation links */}
                     <SheetClose asChild>
-                        <Link href="/about">
-                            <a className="block p-4 text-lg">About</a>
+                        <Link href="#Home" className="block p-4 text-lg">
+                            Home
                         </Link>
                     </SheetClose>
-                    {/* 更多導航鏈接 */}
+                    <SheetClose asChild>
+                        <Link href="#Pricing" className="block p-4 text-lg">
+                            Pricing
+                        </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                        <Link href="#FAQ" className="block p-4 text-lg">
+                            FAQ
+                        </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                        <Link href="blog" className="block p-4 text-lg">
+                            Blog
+                        </Link>
+                    </SheetClose>
                 </div>
             </SheetContent>
         </Sheet>

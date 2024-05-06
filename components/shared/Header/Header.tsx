@@ -62,8 +62,8 @@ const Header = () => {
                 <a className="transition-colors hover:text-primary-500 hover:bg-dark-300 px-3 py-2 rounded-md" href="/#home">Home</a>
                 <a className="transition-colors hover:text-primary-500 hover:bg-dark-300 px-3 py-2 rounded-md" href="/#pricing">Pricing</a>
                 <a className="transition-colors hover:text-primary-500 hover:bg-dark-300 px-3 py-2 rounded-md" href="/#faq">FAQ</a>
-                <a className="transition-colors hover:text-primary-500 hover:bg-dark-300 px-3 py-2 rounded-md" href="/explore">Explore</a>
-                <a className="transition-colors hover:text-primary-500 hover:bg-dark-300 px-3 py-2 rounded-md" target="_blank" href="/blog">Blog</a>
+                {/* <a className="transition-colors hover:text-primary-500 hover:bg-dark-300 px-3 py-2 rounded-md" href="/explore">Explore</a>
+                <a className="transition-colors hover:text-primary-500 hover:bg-dark-300 px-3 py-2 rounded-md" target="_blank" href="/blog">Blog</a> */}
               </>
             }
           </div>
